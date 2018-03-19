@@ -22,7 +22,16 @@ module.exports = {
 
     },
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist')
+        contentBase: path.resolve(__dirname, 'dist'),
+        compress: true,
+        host: '0.0.0.0',
+        port: 9000,
+        hot: true,
+        noInfo: true,
+        open: true,
+        proxy: {
+			"/v1": "http://localhost:9000"
+		}
     },
     performance: {
         hints: "warning"
@@ -36,7 +45,8 @@ module.exports = {
             template: path.resolve(__dirname, 'src/index.html'),
             filename: 'index.html',
             tilte: 'mobx-app'
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     optimization: {
         runtimeChunk: false,
