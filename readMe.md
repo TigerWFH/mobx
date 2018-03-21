@@ -10,6 +10,11 @@
 [babel参考链接](https://segmentfault.com/a/1190000008159877)
 # react
 
+# react-router
+* location：指定当前App的位置
+* match：包含params，path，url，isExact四个属性，如图所示:
+![match对象](./tools/route的path和url.png)
+
 # mobx
 
 # webpack
