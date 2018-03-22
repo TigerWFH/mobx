@@ -22,6 +22,7 @@
 # webpack(4.1.1)
 
 # http
+* <font color="#ff0000">client------>server1------>server2------>...------>origin server(这个才是提供资源的那个web server)，所以即使origin server服务器没有启动，你的http请求也会得到相应的5XX响应。</font>
 * 关于xmlhttprequest状态码以及业务代码如何设计方案？目的：前端更好的处理异常场景，在UI展示或前端交互提供更好的用户体验，比如：通信未接通，直接提示用户网络故障（用户未联网或者服务器挂掉了，这个需要委婉的提示）等等。
 * 1、统一使用http状态码
 * 2、统一自定义状态码
