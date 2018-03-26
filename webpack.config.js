@@ -1,16 +1,31 @@
 var path = require('path');
-var UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var webpack = require('webpack');
+const webpack = require('webpack');
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const srcPath = path.resolve(__dirname, 'src');
+let buildPath = path.resolve(__dirname, 'static');
+let env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+let pluginList = [
+    new webpack.HotModuleReplacementPlugin()
+];
+
+if (env === 'production') {
+    buildPath = path.resolve(__dirname, 'dist');
+    pluginList = [
+    ];
+}
+
 
 module.exports = {
     entry: {
-        app: './src/index.jsx'
+        app: path.join(srcPath, 'index.jsx')
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js'
+        path: buildPath,
+        filename: '[name].[chunkhash].js'
     },
     module: {
         rules: [
@@ -22,7 +37,7 @@ module.exports = {
 
     },
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
+        contentBase: buildPath,
         compress: true,
         host: '0.0.0.0',
         port: 9000,
@@ -40,13 +55,13 @@ module.exports = {
     stats: "minimal",
     plugins: [
         new CleanWebpackPlugin(path.resolve(__dirname, 'dist'), {dry: false}),
-        new UglifyjsWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src/index.html'),
             filename: 'index.html',
             tilte: 'mobx-app'
         }),
-        new webpack.HotModuleReplacementPlugin()
+        new BundleAnalyzer(),
+        ...pluginList
     ],
     optimization: {
         runtimeChunk: false,
