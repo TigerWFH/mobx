@@ -11,6 +11,6 @@
         "react"
     ],
     "plugins": [
-        
+        "transform-decorators-legacy"
     ]
 }
