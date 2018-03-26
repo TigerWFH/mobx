@@ -22,7 +22,7 @@ if (env === 'production') {
 module.exports = {
     entry: {
         vendor: ['react', 'react-dom', 'mobx'],
-        app: path.join(srcPath, 'index.jsx'),
+        app: './src/index.jsx',
     },
     output: {
         path: buildPath,
@@ -37,11 +37,14 @@ module.exports = {
         ]
 
     },
+    // resolve: {
+    //     extensions: ['js', 'jsx'],
+    // },
     devServer: {
         contentBase: buildPath,
         compress: true,
         host: '0.0.0.0',
-        port: 9000,
+        port: 3000,
         hot: true,
         noInfo: true,
         open: true,
