@@ -21,11 +21,12 @@ if (env === 'production') {
 
 module.exports = {
     entry: {
-        app: path.join(srcPath, 'index.jsx')
+        vendor: ['react', 'react-dom', 'mobx'],
+        app: path.join(srcPath, 'index.jsx'),
     },
     output: {
         path: buildPath,
-        filename: '[name].[chunkhash].js'
+        filename: env === 'production' ? '[name].[chunkhash].js' : '[name].[hash].js'
     },
     module: {
         rules: [
