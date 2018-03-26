@@ -7,6 +7,9 @@ import About from './pages/about';
 import Home from './pages/home';
 
 class MobxApp extends React.Component {
+    app = () => {
+
+    }
     render() {
         return (
             <Router>
