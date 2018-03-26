@@ -37,9 +37,10 @@ module.exports = {
         ]
 
     },
-    // resolve: {
-    //     extensions: ['js', 'jsx'],
-    // },
+    resolve: {
+        modules: ['node_modules'],
+        extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    },
     devServer: {
         contentBase: buildPath,
         compress: true,
@@ -49,8 +50,8 @@ module.exports = {
         noInfo: true,
         open: true,
         proxy: {
-			"/v1": "http://localhost:9000"
-		}
+            "/v1": "http://localhost:9000"
+        }
     },
     performance: {
         hints: "warning"
@@ -58,7 +59,7 @@ module.exports = {
     target: "web",
     stats: "minimal",
     plugins: [
-        new CleanWebpackPlugin(path.resolve(__dirname, 'dist'), {dry: false}),
+        new CleanWebpackPlugin(path.resolve(__dirname, 'dist'), { dry: false }),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src/index.html'),
             filename: 'index.html',
